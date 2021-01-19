@@ -31,4 +31,4 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.19.1.0/24
+        - subnet: 172.19.1.0/24  # Replace with a free subset of the prefix from the InternalIPInterfaceAddressPrefix field after running Get-NetNat PowerShell command (https://docs.microsoft.com/en-us/virtualization/windowscontainers/container-networking/advanced#windows-server-2016-work-arounds)
