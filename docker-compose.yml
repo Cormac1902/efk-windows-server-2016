@@ -19,9 +19,11 @@ services:
       - "9200:9200"
 
   kibana:
-    image: sixeyed/kibana
-    links:
-      - "elasticsearch"
+    build: ./kibana
+    # links:
+    #   - "elasticsearch"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     ports:
       - "5601:5601"
 
@@ -31,4 +33,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.19.1.0/24  # Replace with a free subset of the prefix from the InternalIPInterfaceAddressPrefix field after running Get-NetNat PowerShell command (https://docs.microsoft.com/en-us/virtualization/windowscontainers/container-networking/advanced#windows-server-2016-work-arounds)
+      - subnet: 172.19.1.0/24  # Replace with a free subset of the prefix from the InternalIPInterfaceAddressPrefix field after running Get-NetNat PowerShell command (https://docs.microsoft.com/en-us/virtualization/windowscontainers/container-networking/advanced#windows-server-2016-work-arounds)
