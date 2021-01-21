@@ -11,8 +11,11 @@ services:
       - "24224:24224/udp"
 
   elasticsearch:
-    image: rajeshmuraleedharan/elasticsearch:nanoserver
-    command: .\\bin\\elasticsearch.bat
+    build: ./elasticsearch
+    # volumes:
+      # - .\elasticsearch\config:C:\elasticsearch\config
+      # - .\elasticsearch\data:C:\elasticsearch\data
+      # - .\elasticsearch\logs:C:\elasticsearch\logs
     environment:
       - "discovery.type=single-node"
     ports:
@@ -20,10 +23,8 @@ services:
 
   kibana:
     build: ./kibana
-    # links:
-    #   - "elasticsearch"
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+    links:
+      - "elasticsearch"
     ports:
       - "5601:5601"
 
