@@ -33,8 +33,8 @@ COPY init.ps1 .
 COPY --from=downloader C:\kibana\ .
 
 # Default configuration for host & Elasticsearch URL
-RUN (Get-Content ./config/kibana.yml) -replace '#server.host: \"localhost\"', 'server.host: \"0.0.0.0\"' | Set-Content ./config/kibana.yml; `
-    (Get-Content ./config/kibana.yml) -replace '#elasticsearch.url: \"http://localhost:9200\"', 'elasticsearch.url: \"http://elasticsearch:9200\"' | Set-Content ./config/kibana.yml
+RUN	(Get-Content ./config/kibana.yml) -replace '#server.host: \"localhost\"', 'server.host: \"0.0.0.0\"' | Set-Content ./config/kibana.yml; `
+	(Get-Content ./config/kibana.yml) -replace '#elasticsearch.hosts: \[\"http://localhost:9200\"]', 'elasticsearch.hosts: ["http://elasticsearch:9200"]' | Set-Content ./config/kibana.yml;
 
 HEALTHCHECK --start-period=30s --interval=10s --retries=5 `
  CMD powershell -command `
