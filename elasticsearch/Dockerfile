@@ -17,7 +17,8 @@ RUN Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v
     Move-Item c:/elasticsearch-$($env:ES_VERSION) $env:ES_HOME;
 
 # Elasticsearch
-FROM openjdk:11-nanoserver-sac2016
+#FROM openjdk:11-nanoserver-sac2016
+FROM mcr.microsoft.com/windows/nanoserver:sac2016
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
 ARG ES_VERSION="7.10.2"
